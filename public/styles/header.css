@@ -1,0 +1,23 @@
+header {
+    height: calc(400px + 120px);
+    /* Height of the visible part plus the height of the nav bar */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #173300;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+    padding-top: 120px;
+}
+
+header div img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+header div h2 {
+    font-size: 2em;
+    text-align: center;
+}
