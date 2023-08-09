@@ -27,20 +27,25 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
+/* Setting default font for the body */
 body {
   font-family: 'Source Sans 3', sans-serif;
 }
 
+/* Styling for the span elements inside the nav */
 nav span {
   font-family: 'Bungee', sans-serif;
 }
 
-main {
+/* Styling for the main container */
+main.container {
   width: 90%;
+  height: 100px;
   margin: 0 auto;
-  background-color: #f4f1ec;
+  background-color: inherit;
 }
 
 .over-limit {
-  color: red;
+  color: red;  /* Change text color to red */
+  font-weight: bold;  /* Make the counter bold */
 }
