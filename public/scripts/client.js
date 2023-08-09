@@ -1,46 +1,103 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
-// Escaping function to prevent Cross-Site Scripting (XSS)
-const escape = function (str) {
-  let div = document.createElement("div");
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
-
-const createTweetElement = (tweet) => {
-  const timeAgo = timeago.format(tweet.created_at);
-
-  const $tweet = $(`
-      <article class="tweet">
-        <header>
-          <div>
-            <img src=${escape(tweet.user.avatars)} class="usericon">
-            <div class="username">${escape(tweet.user.name)}</div>
-          </div>
-          <div class="userhandle">${escape(tweet.user.handle)}</div>
-        </header>
-        <p>${escape(tweet.content.text)}</p>
-        <footer>
-          <div class="days-ago">${timeAgo}</div>
-          <div class="tweet-actions">
-            <i class="fa-solid fa-flag"></i>
-            <i class="fa-solid fa-retweet"></i>
-            <i class="fa-solid fa-heart"></i>
-          </div>
-        </footer>
-      </article>
-    `);
-
-  return $tweet;
-};
-
-const renderTweets = (tweets) => {
-  $("#tweet-container").empty();
-  for (let tweet of tweets.reverse()) {
-    $("#tweet-container").append(createTweetElement(tweet));
+$(document).ready(function () {
+  // Protect against Cross-Site Scripting
+  function safeText (text) {
+    const element = document.createElement("div");
+    element.appendChild(document.createTextNode(text));
+    return element.innerHTML;
   }
-};
+
+  // Generate tweet's HTML based on data
+  function generateTweetHTML (data) {
+    const timestamp = timeago.format(data.created_at);
+
+    return $(`
+            <article class="tweet">
+                <header>
+                    <div>
+                        <img src=${safeText(
+                          data.user.avatars
+                        )} class="usericon">
+                        <div class="username">${safeText(data.user.name)}</div>
+                    </div>
+                    <div class="userhandle">${safeText(data.user.handle)}</div>
+                </header>
+                <p>${safeText(data.content.text)}</p>
+                <footer>
+                    <div class="days-ago">${timestamp}</div>
+                    <div class="tweet-actions">
+                        <i class="fa-solid fa-flag"></i>
+                        <i class="fa-solid fa-retweet"></i>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </footer>
+            </article>
+        `);
+  }
+
+  // Render all tweets to the DOM
+  function populateTweets (tweets) {
+    const $tweetSection = $("#tweet-section");
+    $tweetSection.empty();
+
+    for (const tweet of tweets.reverse()) {
+      $tweetSection.append(generateTweetHTML(tweet));
+    }
+  }
+
+  // Display error messages to the user
+  function showErrorNotification (action, message) {
+    const notification = `
+            <div id="error-message">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p><b>Error: </b>${message}</p>
+            </div>
+        `;
+
+    if (action === "display") {
+      $("#error-message").remove();
+      $("#new-tweet").prepend(notification);
+      $("#error-message").hide().slideDown();
+    } else {
+      $("#error-message").slideUp();
+    }
+  }
+
+  // Handle form submission
+  function processFormSubmission () {
+    $("main > #new-tweet > form").submit(function (event) {
+      event.preventDefault();
+
+      const tweetText = $("#tweet-text").val();
+      if (!tweetText.length) {
+        return showErrorNotification(
+          "display",
+          "Please write something before tweeting!"
+        );
+      } else if (tweetText.length > 140) {
+        return showErrorNotification(
+          "display",
+          "Your tweet is too long! Keep it under 140 characters."
+        );
+      }
+
+      const serializedData = $(this).serialize();
+      $.post("/tweets", serializedData, function () {
+        loadTweets();
+        $("#tweet-text").val("");
+        $("output.counter").text("140");
+        showErrorNotification("hide");
+      });
+    });
+  }
+
+  // Load all tweets
+  function loadTweets () {
+    $.ajax("/tweets", { method: "GET" }).done(function (data) {
+      populateTweets(data);
+    });
+  }
+
+  // Initialize the application
+  loadTweets();
+  processFormSubmission();
+});

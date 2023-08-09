@@ -1,0 +1,81 @@
+/* Tweet Section */
+#tweet-section {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.usericon {
+  height: 50px;
+}
+
+.userhandle {
+  color: rgba(64, 86, 161, 0.29);
+  font-weight: bold;
+}
+
+/* Individual Tweet Styles */
+.tweet {
+  border: 3px solid #362C2C;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tweet:hover {
+  box-shadow: 10px 10px 0px -2px rgba(64, 86, 161, 0.29);
+}
+
+/* Tweet Icons: Flag, Retweet, Like */
+.tweet-actions {
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tweet-actions>i {
+  color: #4056A1;
+}
+
+.tweet-actions>i:hover {
+  color: rgb(214, 80, 255);
+}
+
+/* Tweet Header: Avatar, Username, Userhandle */
+.tweet>header {
+  padding: 5px 15px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tweet>header>div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+
+
+/* Tweet Content */
+.tweet>p {
+  padding: 30px 15px;
+  margin: 0;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+
+/* Tweet Footer: Time Ago, Icons */
+.tweet>footer {
+  height: 35px;
+  margin: 0;
+  padding: 10px 15px 5px;
+  border-top: 3px solid #362C2C;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: bold;
+}

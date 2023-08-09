@@ -1,0 +1,68 @@
+/*---------- Responsive Design Styles ----------*/
+
+/* 
+   Styles for Wider Screens (above 1024px) 
+*/
+@media only screen and (min-width: 1024px) {
+
+    /* Outer container configurations */
+    #outer-container {
+        padding: 170px 5% 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Wider screen header adjustments */
+    #outer-container>header {
+        padding-top: 20px;
+        margin: 0 10px 10px 0;
+        width: 35%;
+        height: 60vh;
+    }
+
+    /* Wider screen main section adjustments */
+    #outer-container>main {
+        margin-right: 0;
+        width: 55%;
+    }
+
+    /* Stylizing the navigation bar for wider screens */
+    nav {
+        position: fixed;
+        background-color: #4056A1;
+    }
+
+    /* Adjustments for user's name display in header */
+    #user-name h2 {
+        margin-top: 0;
+    }
+
+    /* Tweaking the tweet section design for wider screens */
+    .container>#new-tweet {
+        margin-top: 0;
+    }
+
+    /* Coloring the downward angle icon in nav bar */
+    i.fa-angles-down {
+        color: rgb(251, 244, 119);
+    }
+
+}
+
+/* 
+   Styles for Narrower Screens (up to 500px) 
+*/
+@media only screen and (max-width: 500px) {
+
+    /* Adjusting Tweeter ID for narrower screens */
+    #tweeter {
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+
+    /* Hiding the right side of the navigation bar on smaller screens */
+    #nav-angles {
+        display: none;
+    }
+
+}

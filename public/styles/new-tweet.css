@@ -20,7 +20,7 @@
 #tweet-text::placeholder {
     font-size: 25px;
     font-weight: bold;
-    color: #362C2C;
+    color: #1d1c1c;
 }
 
 /* Styles for text and icon inside error message */
@@ -43,8 +43,8 @@
     align-items: center;
     margin-bottom: 25px;
     padding-left: 15px;
-    color: #6d0000;
-    border: 2px solid #6d0000;
+    color: #ff0a0a;
+    border: 2px solid #6d0700;
     background-color: rgba(109, 0, 0, 0.3);
     gap: 15px;
 }
