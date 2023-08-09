@@ -1,0 +1,46 @@
+.new-tweet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-tweet form {
+    display: flex;
+    font-family: inherit;
+    flex-direction: column;
+    width: 100%;
+}
+
+.new-tweet input {
+    border: none;
+    border-bottom: 3px solid black;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1em;
+    outline: none;
+}
+
+.new-tweet button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.new-tweet form div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.new-tweet button {
+    align-self: flex-start;
+}
+
+.new-tweet .counter {
+    text-align: right;
+    align-self: flex-end;
+    font-weight: bold;
+}
