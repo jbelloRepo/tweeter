@@ -10,3 +10,30 @@ const escape = function (str) {
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 };
+
+const createTweetElement = (tweet) => {
+  const timeAgo = timeago.format(tweet.created_at);
+
+  const $tweet = $(`
+      <article class="tweet">
+        <header>
+          <div>
+            <img src=${escape(tweet.user.avatars)} class="usericon">
+            <div class="username">${escape(tweet.user.name)}</div>
+          </div>
+          <div class="userhandle">${escape(tweet.user.handle)}</div>
+        </header>
+        <p>${escape(tweet.content.text)}</p>
+        <footer>
+          <div class="days-ago">${timeAgo}</div>
+          <div class="tweet-actions">
+            <i class="fa-solid fa-flag"></i>
+            <i class="fa-solid fa-retweet"></i>
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </footer>
+      </article>
+    `);
+
+  return $tweet;
+};
