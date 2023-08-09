@@ -37,3 +37,10 @@ const createTweetElement = (tweet) => {
 
   return $tweet;
 };
+
+const renderTweets = (tweets) => {
+  $("#tweet-container").empty();
+  for (let tweet of tweets.reverse()) {
+    $("#tweet-container").append(createTweetElement(tweet));
+  }
+};
