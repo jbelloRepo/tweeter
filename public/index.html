@@ -18,6 +18,10 @@
     rel="stylesheet" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -27,13 +31,10 @@
 
   <!-- New-tweet CSS -->
   <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/tweet-container.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/tweets-section.css" type="text/css" />
 
   <!-- Header CSS -->
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-
-  <!-- External JS
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/client.js"></script>
@@ -41,49 +42,33 @@
 </head>
 
 <body>
-  <!-- Top nav bar (fixed) -->
-  <!-- Navigation bar -->
-  <nav id="top-navbar">
-    <span id="branding">tweeter</span>
-    <div id="nav-right-side">
+  <nav>
+    <span id="tweeter">tweeter</span>
+    <span id="nav-angles">
       <span id="write-new-tweet"><b>Write</b> a new tweet</span>
-      <i class="fas fa-angle-double-down"></i>
-    </div>
+      <i class="fa-solid fa-angles-down"></i>
+    </span>
   </nav>
-
-
   <div id="outer-container">
-
-    <!-- Header Section -->
     <header>
       <div>
-        <i class="fas fa-user"></i>
+        <img src="./images/profile-hex.png">
       </div>
-      <div id="user-profile-name">
-        <h2><b>@Sir-Newt</b></h2>
+      <div id="user-name">
+        <h2><b>User</b> 1</h2>
       </div>
     </header>
-
-
-    <!-- Page-specific (main) content here -->
-    <!-- Main Content Area -->
-    <main class="content-area">
-
-      <!-- New Tweet Composition Section -->
+    <main class="container">
       <section id="new-tweet">
-        <form action="/tweets" method="POST">
-          <form action="/tweets" method="POST" enctype="application/x-www-form-urlencoded">
-            <textarea name="tweet-text-content" id="tweet-text" placeholder="What are you humming about?"></textarea>
-            <div class="tweet-controls">
-              <button type="submit" class="tweet-btn">Tweet</button>
-              <output class="tweet-counter" for="tweet-text-content">140</output>
-            </div>
-          </form>
+        <form action="/tweets" method="POST" enctype="application/x-www-form-urlencoded">
+          <textarea name="text" id="tweet-text" placeholder="What are you humming about?"></textarea>
+          <div>
+            <button type="submit">Tweet</button>
+            <output class="tweet-counter" id="char-counter" for="tweet-text-content">140</output>
+          </div>
+        </form>
       </section>
-
-      <!-- Tweets Display Section -->
-      <section id="tweets-section">
-        <!-- Future tweets will be loaded here via AJAX or any other mechanism -->
+      <section id="tweet-section">
       </section>
 
     </main>
