@@ -1,13 +1,13 @@
 $(document).ready(function () {
   // Protect against Cross-Site Scripting
-  function safeText (text) {
+  function safeText(text) {
     const element = document.createElement("div");
     element.appendChild(document.createTextNode(text));
     return element.innerHTML;
   }
 
   // Generate tweet's HTML based on data
-  function generateTweetHTML (data) {
+  function generateTweetHTML(data) {
     const timestamp = timeago.format(data.created_at);
 
     return $(`
@@ -35,7 +35,7 @@ $(document).ready(function () {
   }
 
   // Render all tweets to the DOM
-  function populateTweets (tweets) {
+  function populateTweets(tweets) {
     const $tweetSection = $("#tweet-section");
     $tweetSection.empty();
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
   }
 
   // Display error messages to the user
-  function showErrorNotification (action, message) {
+  function showErrorNotification(action, message) {
     const notification = `
             <div id="error-message">
                 <i class="fa-solid fa-circle-exclamation"></i>
@@ -63,7 +63,7 @@ $(document).ready(function () {
   }
 
   // Handle form submission
-  function processFormSubmission () {
+  function processFormSubmission() {
     $("main > #new-tweet > form").submit(function (event) {
       event.preventDefault();
 
@@ -83,15 +83,18 @@ $(document).ready(function () {
       const serializedData = $(this).serialize();
       $.post("/tweets", serializedData, function () {
         loadTweets();
+
+        // Resetting the text area and the counter after successful tweet submission
         $("#tweet-text").val("");
-        $("output.counter").text("140");
+        $("#char-counter").text("140");
+
         showErrorNotification("hide");
       });
     });
   }
 
   // Load all tweets
-  function loadTweets () {
+  function loadTweets() {
     $.ajax("/tweets", { method: "GET" }).done(function (data) {
       populateTweets(data);
     });
