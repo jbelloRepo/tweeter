@@ -1,13 +1,13 @@
 $(document).ready(function () {
   // Protect against Cross-Site Scripting
-  function safeText(text) {
+  function safeText (text) {
     const element = document.createElement("div");
     element.appendChild(document.createTextNode(text));
     return element.innerHTML;
   }
 
   // Generate tweet's HTML based on data
-  function generateTweetHTML(data) {
+  function generateTweetHTML (data) {
     const timestamp = timeago.format(data.created_at);
 
     return $(`
@@ -35,7 +35,7 @@ $(document).ready(function () {
   }
 
   // Render all tweets to the DOM
-  function populateTweets(tweets) {
+  function populateTweets (tweets) {
     const $tweetSection = $("#tweet-section");
     $tweetSection.empty();
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
   }
 
   // Display error messages to the user
-  function showErrorNotification(action, message) {
+  function showErrorNotification (action, message) {
     const notification = `
             <div id="error-message">
                 <i class="fa-solid fa-circle-exclamation"></i>
@@ -63,38 +63,42 @@ $(document).ready(function () {
   }
 
   // Handle form submission
-  function processFormSubmission() {
+  // Handle form submission
+  // Handle form submission
+  function processFormSubmission () {
     $("main > #new-tweet > form").submit(function (event) {
       event.preventDefault();
 
-      const tweetText = $("#tweet-text").val();
+      const tweetText = $("#tweet-text").val().trim();
+
       if (!tweetText.length) {
-        return showErrorNotification(
+        showErrorNotification(
           "display",
           "Please write something before tweeting!"
         );
       } else if (tweetText.length > 140) {
-        return showErrorNotification(
+        showErrorNotification(
           "display",
           "Your tweet is too long! Keep it under 140 characters."
         );
+      } else {
+        const serializedData = $(this).serialize();
+        $.post("/tweets", serializedData, function () {
+          loadTweets();
+          showErrorNotification("hide");
+        });
       }
 
-      const serializedData = $(this).serialize();
-      $.post("/tweets", serializedData, function () {
-        loadTweets();
-
-        // Resetting the text area and the counter after successful tweet submission
-        $("#tweet-text").val("");
-        $("#char-counter").text("140");
-
-        showErrorNotification("hide");
-      });
+      // Reset textarea and counter for all conditions
+      $("#tweet-text").val("");
+      $("#char-counter").text("140");
+      // Trigger input event on textarea to update the counter visually
+      $("#tweet-text").trigger("input");
     });
   }
 
   // Load all tweets
-  function loadTweets() {
+  function loadTweets () {
     $.ajax("/tweets", { method: "GET" }).done(function (data) {
       populateTweets(data);
     });
