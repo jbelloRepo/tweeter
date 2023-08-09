@@ -1,13 +1,13 @@
 $(document).ready(function () {
   // Protect against Cross-Site Scripting
-  function safeText (text) {
+  function safeText(text) {
     const element = document.createElement("div");
     element.appendChild(document.createTextNode(text));
     return element.innerHTML;
   }
 
   // Generate tweet's HTML based on data
-  function generateTweetHTML (data) {
+  function generateTweetHTML(data) {
     const timestamp = timeago.format(data.created_at);
 
     return $(`
@@ -35,7 +35,7 @@ $(document).ready(function () {
   }
 
   // Render all tweets to the DOM
-  function populateTweets (tweets) {
+  function populateTweets(tweets) {
     const $tweetSection = $("#tweet-section");
     $tweetSection.empty();
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
   }
 
   // Display error messages to the user
-  function showErrorNotification (action, message) {
+  function showErrorNotification(action, message) {
     const notification = `
             <div id="error-message">
                 <i class="fa-solid fa-circle-exclamation"></i>
@@ -65,7 +65,7 @@ $(document).ready(function () {
   // Handle form submission
   // Handle form submission
   // Handle form submission
-  function processFormSubmission () {
+  function processFormSubmission() {
     $("main > #new-tweet > form").submit(function (event) {
       event.preventDefault();
 
@@ -98,9 +98,21 @@ $(document).ready(function () {
   }
 
   // Load all tweets
-  function loadTweets () {
-    $.ajax("/tweets", { method: "GET" }).done(function (data) {
-      populateTweets(data);
+  function loadTweets() {
+    $.ajax({
+      method: "GET",
+      url: "/tweets",
+      success: function (data) {
+        populateTweets(data);
+      },
+      error: function (err) {
+        console.error("Error fetching tweets:", err);
+        // Optionally, display an error message to the user
+        showErrorNotification(
+          "display",
+          "Error fetching tweets. Please try again later."
+        );
+      },
     });
   }
 
