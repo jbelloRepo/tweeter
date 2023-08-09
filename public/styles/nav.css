@@ -1,15 +1,32 @@
 nav {
-    height: 120px;
     width: 100%;
-    background-color: #4056A1;
+    height: 120px;
+    background-color: rgb(80, 127, 255);
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
     color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1.5em;
     position: fixed;
+    padding: 0 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-nav span {
-    font-family: 'Bungee', sans-serif;
+
+#write-new-tweet {
+    font-size: 30px;
+}
+
+#tweeter {
+    font-size: 40px;
+    margin-bottom: 0.7em;
+    align-self: flex-end;
+    font-family: Bungee, sans-serif;
+}
+
+#nav-angles {
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
