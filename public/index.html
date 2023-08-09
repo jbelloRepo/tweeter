@@ -42,46 +42,46 @@
 
 <body>
   <!-- Top nav bar (fixed) -->
-  <nav>
-    <span>tweeter hello</span>
-    <div style="display: flex; align-items: center;">
-      <span>Write a new tweet</span>
-      <i class="fas fa-angle-double-down"></i>
+  <!-- Navigation bar -->
+  <nav id="top-navbar">
+    <span id="branding">tweeter</span>
+    <div id="nav-right-side">
+      <span id="write-new-tweet"><b>Write</b> a new tweet</span>
+      <i class="fas fa-angle-double-down"></i> 
     </div>
-
   </nav>
 
-  <header>
-    <div>
-      <img src="/images/profile-hex.png" />
-    </div>
-    <br />
-    <div>
-      <h2>@Sir-Newt</h2>
-    </div>
-  </header>
 
-  <!-- Page-specific (main) content here -->
-  <main class="container">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur.
-    </p>
+  <div id="outer-container">
 
-    <section class="new-tweet">
-      <h2>Compose Tweet</h2>
-      <form action="/tweets/" method="POST">
-        <input type="text" name="text" id="tweet-text" placeholder="What are you humming about?" />
-        <div>
-          <button type="submit">Tweet</button>
-          <output name="counter" class="counter" id="char-counter" for="tweet-text">140</output>
-        </div>
-      </form>
-    </section>
-  </main>
+    <!-- Header Section -->
+    <header>
+      <div>
+        <i class="fas fa-user"></i>
+      </div>
+      <div id="user-profile-name">
+        <h2><b>@Sir-Newt</b></h2>
+      </div>
+    </header>
+
+
+    <!-- Page-specific (main) content here -->
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- New Tweet Composition Section -->
+      <section id="new-tweet">
+        <form action="/tweets" method="POST">
+          <form action="/tweets" method="POST" enctype="application/x-www-form-urlencoded">
+            <textarea name="tweet-text-content" id="tweet-text" placeholder="What are you humming about?"></textarea>
+            <div class="tweet-controls">
+              <button type="submit" class="tweet-btn">Tweet</button>
+              <output class="tweet-counter" for="tweet-text-content">140</output>
+            </div>
+          </form>
+      </section>
+    </main>
+  </div>
 </body>
 
 </html>
